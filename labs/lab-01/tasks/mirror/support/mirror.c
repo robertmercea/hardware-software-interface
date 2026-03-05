@@ -8,6 +8,13 @@
 
 void mirror(char *s)
 {
-	/* TODO */
-	(void) s;
+	int i;
+	int n = strlen(s);
+	char aux;
+
+	for (i = 0; i < n / 2; i++) {
+		aux = s[i];
+		s[i] = s[n - i - 1];
+		s[n - i - 1] = aux;
+	}
 }
