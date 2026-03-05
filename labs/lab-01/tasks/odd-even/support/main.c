@@ -8,6 +8,8 @@
 int main(void)
 {
 	/* TODO: Test functions */
+	int arr[] = {214, 77, 84, 134, 86};
+	check_parity(arr, 5);
 
 	return 0;
 }
