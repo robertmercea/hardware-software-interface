@@ -7,9 +7,6 @@
 
 void print_chars(void)
 {
-	/**
-	 * TODO: Implement function
-	 */
 	int i;
 	char *p = (char *)v;
 
@@ -23,9 +20,6 @@ void print_chars(void)
 
 void print_shorts(void)
 {
-	/**
-	 * TODO: Implement function
-	 */
 	int i;
 	short *p = (short *)v;
 
@@ -39,9 +33,6 @@ void print_shorts(void)
 
 void print_ints(void)
 {
-	/**
-	 * TODO: Implement function
-	 */
 	int i;
 	int *p = (int *)v;
 
@@ -55,9 +46,6 @@ void print_ints(void)
 
 void print_long_longs(void)
 {
-	/**
-	 * TODO: Implement function
-	 */
 	int i;
 	long *p = (long *)v;
 
