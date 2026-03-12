@@ -16,7 +16,7 @@ char *delete_first(char *s, char *pattern)
 
 	char *res = strdup(s);
 	int off = first_appearance - s;
-	strcpy(res + off, res + off + strlen(pattern));
+	strcpy(res + off, first_appearance + strlen(pattern));
 	
 	return res;
 }
