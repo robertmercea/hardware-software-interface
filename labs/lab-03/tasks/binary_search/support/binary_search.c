@@ -14,7 +14,7 @@ find:
 	middle = start + (end - start) / 2;
 
 	if (v[middle] == dest) {
-		return middle;
+		goto finish;
 	}
 
 	if (v[middle] > dest) {
@@ -30,4 +30,7 @@ find:
 	}
 
 	return -1;
+
+finish:
+	return middle;
 }
