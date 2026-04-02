@@ -31,12 +31,56 @@ add_byte_array_element:
     PRINTF64 `Byte array sum: %u\n\x0`, rax
 
     ; TODO Compute sum for elements in word_array
+		xor rax, rax
+		mov rcx, ARRAY_SIZE
+sum_word:
+		mov dx, [word_array + rcx * 2 - 2]
+		add rax, rdx
+		loop sum_word
 
-    ; TODO Compute sum for elements in dword_array
+		PRINTF64 `Word array sum: %u\n\x0`, rax
 
-    ; TODO Compute sum for elements in qword_array
+		xor rax, rax
+		mov rcx, ARRAY_SIZE
+sum_dword:
+		mov edx, [dword_array + rcx * 4 - 4]
+		add rax, rdx
+		loop sum_dword
+
+		PRINTF64 `Dword array sum: %u\n\x0`, rax
+
+		xor rax, rax
+		mov rcx, ARRAY_SIZE
+sum_qword:
+		mov rdx, [qword_array + rcx * 8 - 8]
+		add rax, rdx
+		loop sum_qword
+
+		PRINTF64 `Qword array sum: %llu\n\x0`, rax
 
     ; TODO Compute sum for elements in big_qword_array
+		xor rax, rax
+		xor rbx, rbx
+
+		mov rdx, [big_qword_array]
+		add rax, rdx
+		jnc next1
+		inc rbx
+
+next1:
+		mov rdx, [big_qword_array + 8]
+		add rax, rdx
+		jnc next2
+		inc rbx
+
+next2:
+		mov rdx, [big_qword_array + 16]
+		add rax, rdx
+		jnc finish
+		inc rbx
+
+finish:
+    PRINTF64 `128-bit addition example: 0x%lx%016lx\n\x0`, rbx, rax
 
     leave
     ret
