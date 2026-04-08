@@ -36,10 +36,15 @@ main:
     push rbp
     mov rbp, rsp
 
-    ; TODO: Update name, surname, birth_year, gender and age such that:
+    ; Update name, surname, birth_year, gender and age such that:
     ; birth_year is 1993
     ; age is 22
     ; group is '323CA'
+		mov word [sample_student + birth_year], 1993
+		mov byte [sample_student + age], 22
+		mov dword [sample_student + group], "323"
+		mov dword [sample_student + group + 3], "CA"
+		mov byte [sample_student + group + 5], 0
 
     lea rsi, [sample_student + name]
     mov rdi, format_name
