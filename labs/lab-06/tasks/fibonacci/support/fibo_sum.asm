@@ -17,11 +17,20 @@ main:
 
     push rbx
 
-    ; TODO: calculate the sum of first N fibonacci numbers
+    ; calculate the sum of first N fibonacci numbers
     ;       (f(0) = 0, f(1) = 1)
     xor rax, rax     ;store the sum in rax
+		mov rbx, 0
+		mov rdx, 1
 
     ; Use the loop instruction
+		mov rcx, qword [N]
+fibo:
+		add rax, rbx
+		add rbx, rdx
+		xchg rdx, rbx
+
+		loop fibo
 
     mov rdi, sum_print_format
     mov rsi, [N]
