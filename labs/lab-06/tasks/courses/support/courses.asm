@@ -77,6 +77,64 @@ main:
 	push rbp
 	mov rbp, rsp
 	PRINTF64 `The students list is:\n\x0`
-	; TODO: Print the list of students and the courses where they are assigned
-    leave
-    ret
+	; Print the list of students and the courses where they are assigned
+
+	mov rax, qword [v_students_count] ; student iterator
+	mov r10, students
+	mov r11, courses
+
+start_search:
+	mov rcx, qword [v_courses_count]  ; init course iterator
+
+	; getting the course id - verbose version
+	; mov rbx, qword [r10 + student_t_size * rax - student_t_size + id_course] ; get current course id
+	mov r9, rax
+	dec r9
+	mul r9, student_t_size
+	mov rbx, qword [r10 + r9 + id_course]
+
+find_course:
+	cmp rax, 0
+	je end
+
+	; getting the current_course_id - verbose version
+	; cmp qword [r11 + course_t_size * rcx - course_t_size + id], rbx ; check if current_course_id == target_course_id
+
+	mov r9, rcx
+	dec r9
+	mul r9, course_t_size
+	cmp qword [r11 + r9 + id], rbx
+
+	je found
+	loop find_course
+
+	; course not found
+
+	; getting name of course - verbose version
+	; lea r8, r11 + course_t_size * rcx - course_t_size + name_course ; get name of course
+
+	mov r9, rcx
+	dec r9
+	mul r9, course_t_size
+	add r9, r11
+	lea r8, r9 + name_course
+
+	; aaaaaaaaaaaaaa
+
+	lea r9, unassigned
+	PRINTF64 `%s ---- %s\n\x0`, r9, r8 																	; display both
+	dec rax
+	loop find_course
+
+
+found:
+	lea r8, r11 + course_t_size * rcx - course_t_size + name_course ; get name of course
+	lea r9, r10 + student_t_size * rax - student_t_size + name     ; get name of student
+	PRINTF64 `%s ---- %s\n\x0`, r9, r8 																	; display both
+	dec rax
+
+	jmp start_search
+
+end:
+  leave
+  ret
