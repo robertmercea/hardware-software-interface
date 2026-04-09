@@ -31,15 +31,45 @@ main:
     ; Print all three values (int_x, char_y, string_s) from sample_obj.
     ; Hint: use "lea reg, [base + offset]" to save the result of
     ; "base + offset" into register "reg".
+		mov eax, [sample_obj + int_x]
+		PRINTF64 `int_x: %d\n\x0`, rax
 
-    ; TODO: write the equivalent of "sample_obj->int_x = new_int".
+		xor rax, rax
+		mov al, byte [sample_obj + char_y]
+		PRINTF64 `char_y: %c\n\x0`, rax
 
-    ; TODO: write the equivalent of "sample_obj->char_y = new_char".
+		xor rax, rax
+		lea rax, sample_obj + string_s
+		PRINTF64 `string_s: %s\n\x0`, rax
 
-    ; TODO: write the equivalent of "strcpy(sample_obj->string_s, new_string)".
 
-    ; TODO: print all three values again to validate the results of the
+    ; write the equivalent of "sample_obj->int_x = new_int".
+		mov eax, dword [new_int]
+		mov dword [sample_obj + int_x], eax
+
+    ; write the equivalent of "sample_obj->char_y = new_char".
+		mov al, byte [new_char]
+		mov [sample_obj + char_y], al
+
+    ; write the equivalent of "strcpy(sample_obj->string_s, new_string)".
+		mov rcx, 14
+copy:
+		mov al, byte [new_string + rcx - 1]
+		mov byte [sample_obj + string_s + rcx - 1], al
+		loop copy
+
+    ; print all three values again to validate the results of the
     ; three set operations above.
+		mov eax, [sample_obj + int_x]
+		PRINTF64 `int_x: %d\n\x0`, rax
+
+		xor rax, rax
+		mov al, byte [sample_obj + char_y]
+		PRINTF64 `char_y: %c\n\x0`, rax
+
+		xor rax, rax
+		lea rax, sample_obj + string_s
+		PRINTF64 `string_s: %s\n\x0`, rax
 
     xor rax, rax
     leave
