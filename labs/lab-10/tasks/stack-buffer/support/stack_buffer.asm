@@ -48,7 +48,10 @@ fill_byte:
     cmp rcx, 64
     jl fill_byte
 
-    ; TODO 3: Print "DEADBEEF" instead of "CAFEBABE"
+    ; Since rcx is at index 64, basically one index out of the bounds of the
+    ; array, it currently points to the value of our local variable:
+    ; "DEADBEEF", therefore we can overwrite it
+    mov dword [rbx + rcx], 0xDEADBEEF
 
     ; Text before printing buffer.
     mov rdi, buffer_intro_message
@@ -73,10 +76,12 @@ print_byte:
     pop rcx                ; restore rcx
     inc rcx
 
-    ; TODO 1: Print the next bytes 4
+    ; TODO 1: Print the next 4 bytes
     ; TODO 2: After printing the local variable,
     ; print the next 8 bytes (What contain the next 8 bytes?)
-    cmp ecx, 64
+
+    ; student's note: the values printed are the stack alignment (zeroed out by the OS) and the rip value
+    cmp ecx, 76 ; 76 = 64 + 4 + 8
     jl print_byte
 
     ; Print new line. C equivalent instruction is puts("").
