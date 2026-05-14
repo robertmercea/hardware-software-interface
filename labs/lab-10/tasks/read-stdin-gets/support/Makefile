@@ -6,7 +6,7 @@ SRCS := $(shell find . -name "*.asm")
 OBJS := $(SRCS:.asm=.o)
 
 ASFLAGS ?= -f elf64 -F dwarf
-CFLAGS ?= -Wall
+CFLAGS ?= -Wall -g
 LDFLAGS ?= -no-pie
 
 TARGET_EXEC = read_stdin
