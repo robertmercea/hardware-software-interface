@@ -4,6 +4,6 @@
 
 int main(void)
 {
-	puts("Hi, my name is TODO.");
+	puts("Hi, my name is Generic ACS Student.");
 	return 0;
 }
