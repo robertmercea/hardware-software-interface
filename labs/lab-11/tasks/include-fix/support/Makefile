@@ -1,4 +1,4 @@
-CFLAGS = -fno-PIC -g
+CFLAGS = -fno-PIC -g --include stdio.h
 LDFLAGS = -no-pie
 
 .DEFAULT_GOAL: all
