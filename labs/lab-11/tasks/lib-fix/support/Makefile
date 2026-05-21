@@ -8,7 +8,7 @@ LDFLAGS = -no-pie
 all: main
 
 main: main.o libops.a
-	$(CC) $(LDFLAGS) -o $@ $< -lops
+	$(CC) $(LDFLAGS) -o $@ $< -L. -lops
 
 main.o: main.c ops.h
 
